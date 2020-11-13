@@ -14,15 +14,17 @@ class TestRoom(unittest.TestCase):
         self.song = Song("Aesop Rock", "Lotta Years")
         self.song_2 = Song("Jon Hopkins", "Emerald")
 
+
     def test_room_can_add_songs(self):
         self.room.add_song(self.song)
         self.room.add_song(self.song_2)
         list_len = self.room.get_song_list_len()
         self.assertEqual(2, list_len)
 
-    def test_room_has_guests(self):
+    def test_room_can_add_guest(self):
         self.room.add_guest(self.guest)
-        self.room.add_guest(self.guest_2)
+        list_len = self.room.get_current_guest_list_len()
+        self.assertEqual(1, list_len)
 
     def test_if_room_is_full(self):
         self.room.add_guest(self.guest)
@@ -39,6 +41,10 @@ class TestRoom(unittest.TestCase):
 
     def test_guest_can_pay_bill(self):
         self.assertTrue(self.guest.can_pay_bill(self.room))
+
+    # def test_guest_can_check_in(self):
+    #     self.room.guest_check_in(self.room.room_number, self.guest)
+    #     self.assert
 
 
 
