@@ -3,9 +3,12 @@
 class Room:
 
     # Constuctor
-    def __init__(self):
-        self.song_list       = []
-        self.current_guests  = []
+    def __init__(self, room_number, price_per_hour):
+        self.room_number     =  room_number
+        self.price_per_hour  =  price_per_hour
+        self.song_list       =  []
+        self.current_guests  =  []
+        self.room_max        =  3
 
     # Methods.
 
@@ -18,4 +21,15 @@ class Room:
         return len(self.song_list)
 
     def add_guest(self, new_guest):
+        """ Method that adds a guest to the room. """ 
         self.current_guests.append(new_guest)
+
+    def check_if_room_full(self):
+        """ Method that checks if the room is at max capacity. """ 
+        if len(self.current_guests) >= self.room_max:
+            return True 
+        else: 
+            return False 
+
+ 
+    

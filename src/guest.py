@@ -9,7 +9,14 @@ class Guest:
         self.wallet =  wallet
 
     # Methods.
-    
+
+    def can_pay_bill(self, room):
+        """ Checks if a customer has the funds to pay for the room. """ 
+        if self.wallet >= room.price_per_hour:
+            return True 
+        else: 
+            return False
+
     def pay_bill(self, amount):
         """ Method that allows the customer to pay thier bill. """ 
         self.wallet -= amount
