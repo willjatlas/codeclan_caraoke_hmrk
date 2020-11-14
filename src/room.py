@@ -35,6 +35,18 @@ class Room:
         else: 
             return False 
 
+    def get_song_by_title(self, title):
+        """ Method that returns a list of song objects when given a title """
+        output = []
+        for song in self.song_list:
+            if song.title == title:
+                output.append(song)
+        if len(output) == 0:
+            return "Sorry, we do not have that song"
+        else:
+            return output
+
+
     def guest_check_in(self, guest):
         """ Method that utalises helper methods to check a customer into a room/pay"""
         if self.check_if_room_full() == False:
