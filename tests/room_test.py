@@ -10,7 +10,8 @@ class TestRoom(unittest.TestCase):
         self.room = Room(1 , 7.00)
         self.guest = Guest("Kakashi Hetaki" , 27, 22.50)
         self.guest_2 = Guest("Asuma Sarutobi", 28, 17.00)
-        self.guest_3 = Guest("Jiraiya", 51, 5.00)
+        self.guest_3 = Guest("Jiraiya", 51, 47.00)
+        self.guest_4 = Guest("Shikamaru Nara", 18, 5.00)
         self.song = Song("Aesop Rock", "Lotta Years")
         self.song_2 = Song("Jon Hopkins", "Emerald")
 
@@ -34,16 +35,25 @@ class TestRoom(unittest.TestCase):
 
     def test_if_room_is_not_full(self):
         self.room.add_guest(self.guest)
-        self.room.add_guest(self.guest_2)
         is_false = self.room.check_if_room_full()
         self.assertFalse(is_false)
 
     def test_guest_can_pay_bill(self):
         self.assertTrue(self.guest.can_pay_bill(self.room))
 
+    def test_guest_can_not_pay_bill(self):
+        self.assertFalse(self.guest_4.can_pay_bill(self.room))
+
     def test_guest_can_check_in(self):
         self.room.guest_check_in(self.guest)
         self.assertEqual(1, self.room.get_current_guest_list_len())
+
+    def test_room_is_full(self):
+        self.room.guest_check_in(self.guest)
+        self.room.guest_check_in(self.guest_2)
+        self.room.guest_check_in(self.guest_3)
+        output = self.room.guest_check_in(self.guest_4)
+        self.assertEqual("I'm sorry, this room is currently full, please try another.", output)
 
 
 

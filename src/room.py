@@ -8,7 +8,7 @@ class Room:
         self.price_per_hour  =  price_per_hour
         self.song_list       =  []
         self.current_guests  =  []
-        self.room_max        =  3
+        self.room_max        =  2
 
     # Methods.
 
@@ -30,17 +30,22 @@ class Room:
 
     def check_if_room_full(self):
         """ Method that checks if the room is at max capacity. """ 
-        if self.get_current_guest_list_len() == self.room_max:
+        if self.get_current_guest_list_len() >= self.room_max:
             return True 
         else: 
             return False 
 
     def guest_check_in(self, guest):
-        if guest.can_pay_bill(self) == True \
-        and self.check_if_room_full() == False:
-            guest.pay_bill(self.price_per_hour)
-            self.add_guest(guest)
-
+        """ Method that utalises helper methods to check a customer into a room/pay"""
+        if self.check_if_room_full() == False:
+            if guest.can_pay_bill(self) == True:
+                guest.pay_bill(self.price_per_hour)
+                self.add_guest(guest)
+            else:
+                
+                return "You require more funds." 
+        else:
+            return "I'm sorry, this room is currently full, please try another."
 
  
     
