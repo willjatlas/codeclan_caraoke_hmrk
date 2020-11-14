@@ -77,3 +77,7 @@ class TestRoom(unittest.TestCase):
         self.room.add_song(self.song)
         output = self.guest_2.look_for_fav_song(self.room)
         self.assertEqual("Ya BEAUTY!", output)
+
+    def test_room_till_increase_at_check_in(self):
+        self.room.guest_check_in(self.guest)
+        self.assertEqual(7, self.room.till)

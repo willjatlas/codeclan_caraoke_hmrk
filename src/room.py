@@ -9,6 +9,7 @@ class Room:
         self.song_list       =  []
         self.current_guests  =  []
         self.room_max        =  2
+        self.till            =  0 
 
     # Methods.
 
@@ -35,6 +36,10 @@ class Room:
         else: 
             return False 
 
+    def add_room_payment(self):
+        """ Method that increases the till by the room price per hour """
+        self.till += self.price_per_hour
+
     def get_song_by_title(self, title):
         """ Method that returns a list of song objects when given a title """
         output = []
@@ -52,9 +57,9 @@ class Room:
         if self.check_if_room_full() == False:
             if guest.can_pay_bill(self) == True:
                 guest.pay_bill(self.price_per_hour)
+                self.add_room_payment()
                 self.add_guest(guest)
-            else:
-                
+            else: 
                 return "You require more funds." 
         else:
             return "I'm sorry, this room is currently full, please try another."
