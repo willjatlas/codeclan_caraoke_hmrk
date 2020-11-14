@@ -55,6 +55,8 @@ class TestRoom(unittest.TestCase):
         output = self.room.guest_check_in(self.guest_4)
         self.assertEqual("I'm sorry, this room is currently full, please try another.", output)
 
-
+    def test_not_enough_funds(self):
+        output = self.room.guest_check_in(self.guest_4)
+        self.assertEqual("You require more funds.", output)
 
 
