@@ -25,20 +25,21 @@ class Room:
         self.current_guests.append(new_guest)
 
     def get_current_guest_list_len(self):
-        """ Method that returns how many people are curently in a room"""
+        """ Method that returns how many people are curently in a room. """
         return len(self.current_guests)
 
     def check_if_room_full(self):
         """ Method that checks if the room is at max capacity. """ 
-        if len(self.current_guests) >= self.room_max:
+        if self.get_current_guest_list_len() == self.room_max:
             return True 
         else: 
             return False 
 
-    # def guest_check_in(self, room_number, guest):
-    #     if guest.can_pay_bill == True \
-    #     and self.check_if_room_full() == False:
-    #         guest.pay
+    def guest_check_in(self, guest):
+        if guest.can_pay_bill(self) == True \
+        and self.check_if_room_full() == False:
+            guest.pay_bill(self.price_per_hour)
+            self.add_guest(guest)
 
 
  
