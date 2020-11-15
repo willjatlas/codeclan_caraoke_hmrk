@@ -26,4 +26,4 @@ class Guest:
         """ Method that lets the customer look for their favourite song in a room"""
         for song in room.song_list:
             if self.favourite_song == song.title:
-                return "Ya BEAUTY!"
+                return "DIS MY JAM!"

@@ -15,6 +15,7 @@ class TestRoom(unittest.TestCase):
         self.song    = Song("Aesop Rock", "Lotta Years")
         self.song_2  = Song("Jon Hopkins", "Emerald")
         self.song_3  = Song("Led Zeppelin", "Communications Breakdown")
+        self.song_4  = Song("Aesop Rock", "None Shall Pass")
 
 
     def test_room_can_add_songs(self):
@@ -64,19 +65,31 @@ class TestRoom(unittest.TestCase):
         self.room.add_song(self.song)
         self.room.add_song(self.song_2)
         self.room.add_song(self.song_3)
-        songs = self.room.get_song_by_title("Emerald")
+        songs = self.room.get_songs_by_title("Emerald")
         self.assertEqual(1, len(songs)) 
-
 
     def test_no_songs_found_by_title(self):
         self.room.add_song(self.song_3)
-        output = self.room.get_song_by_title("Emerald")
+        output = self.room.get_songs_by_title("Emerald")
         self.assertEqual("Sorry, we do not have that song", output)
+
+    def test_get_songs_by_artist(self):
+        self.room.add_song(self.song_2)
+        self.room.add_song(self.song)
+        self.room.add_song(self.song_4)
+        songs = self.room.get_songs_by_artist("Aesop Rock")
+        self.assertEqual(2, len(songs))
+    
+    def test_no_songs_by_artist(self):
+        self.room.add_song(self.song)
+        self.room.add_song(self.song_2)
+        output = self.room.get_songs_by_artist("Barry White")
+        self.assertEqual("Sorry, we don't have anything by that artist", output)
 
     def test_look_for_fav_song(self):
         self.room.add_song(self.song)
         output = self.guest_2.look_for_fav_song(self.room)
-        self.assertEqual("Ya BEAUTY!", output)
+        self.assertEqual("DIS MY JAM!", output)
 
     def test_room_till_increase_at_check_in(self):
         self.room.guest_check_in(self.guest)
