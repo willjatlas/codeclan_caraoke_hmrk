@@ -12,10 +12,10 @@ class TestRoom(unittest.TestCase):
         self.guest_2 = Guest("Asuma Sarutobi", 28, 17.00, "Lotta Years")
         self.guest_3 = Guest("Jiraiya", 51, 47.00, "Brown Eyed Girl")
         self.guest_4 = Guest("Shikamaru Nara", 18, 5.00, "Emerald")
-        self.song    = Song("Aesop Rock", "Lotta Years")
-        self.song_2  = Song("Jon Hopkins", "Emerald")
-        self.song_3  = Song("Led Zeppelin", "Communications Breakdown")
-        self.song_4  = Song("Aesop Rock", "None Shall Pass")
+        self.song    = Song("Aesop Rock", "Lotta Years", 50)
+        self.song_2  = Song("Jon Hopkins", "Emerald", 0)
+        self.song_3  = Song("Led Zeppelin", "Communications Breakdown", 100)
+        self.song_4  = Song("Aesop Rock", "None Shall Pass", 150)
 
 
     def test_room_can_add_songs(self):

@@ -8,6 +8,8 @@ class Guest:
         self.age            =  age 
         self.wallet         =  wallet
         self.favourite_song = favourite_song
+        self.current_exp    = 0
+        self.skill_level    = 0
 
     # Methods.
 
@@ -27,3 +29,27 @@ class Guest:
         for song in room.song_list:
             if self.favourite_song == song.title:
                 return "DIS MY JAM!"
+    
+    def level_up(self):
+        """ Method to increase the guests skill level """ 
+        self.skill_level += 1 
+
+    def reset_current_exp(self):
+        """ Method to adjust current exp after level up """ 
+        self.current_exp = 0
+
+    def increase_exp(self, amount):
+        """ Method that adds the songs exp gain to the guest """ 
+        self.current_exp += amount
+        if self.current_exp >= 100:
+            extra_xp = self.current_exp - 100
+            self.reset_current_exp()
+            self.level_up()
+            self.increase_exp(extra_xp)
+
+    def sing_song(self, song):
+        """ Method that allow a guest to sing a song """ 
+        self.increase_exp(song.xp_gain)
+        if self.favourite_song == song.title:
+            # BONUS XP :D
+            self.increase_exp(song.xp_gain * 0.5)
