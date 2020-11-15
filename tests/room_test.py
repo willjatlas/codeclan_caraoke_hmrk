@@ -94,3 +94,17 @@ class TestRoom(unittest.TestCase):
     def test_room_till_increase_at_check_in(self):
         self.room.guest_check_in(self.guest)
         self.assertEqual(7, self.room.till)
+    
+    def test_find_guest_by_name(self):
+        self.room.add_guest(self.guest)
+        self.room.add_guest(self.guest_2)
+        self.room.add_guest(self.guest_3)
+        self.room.add_guest(self.guest_4)
+        guest = self.room.find_guest_by_name("Jiraiya")
+        self.assertEqual("Brown Eyed Girl", guest.favourite_song)
+    
+    def test_empty_room(self):
+        self.room.add_guest(self.guest)
+        self.room.add_guest(self.guest_2)
+        self.room.empty_room()
+        self.assertEqual(0, len(self.room.current_guests))

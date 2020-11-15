@@ -53,14 +53,12 @@ class Room:
         
     def get_songs_by_artist(self, artist):
         """ Method that returns a list of songs by a given artist. """
-        output = [] 
-        for song in self.song_list:
-            if song.artist == artist:
-                output.append(song)
-        if len(output) == 0:
+        # Pretty much the same as by title, but just to try list comprehension. 
+        songs = [song for song in self.song_list if song.artist == artist]
+        if len(songs) == 0:
             return "Sorry, we don't have anything by that artist"
         else: 
-            return output
+            return songs
 
     def guest_check_in(self, guest):
         """ Method that utalises helper methods to check a customer into a room/pay"""
@@ -74,5 +72,17 @@ class Room:
         else:
             return "I'm sorry, this room is currently full, please try another."
 
- 
+    def find_guest_by_name(self, name):
+        """ Method that returns a guest object from a room when given their name """
+        for guest in self.current_guests:
+            if guest.name == name:
+                return guest
     
+    def remove_guest_by_name(self, name):
+        """ Method that removes a guest by name from the room. """
+        guest_to_remove = self.find_guest_by_name(name)
+        self.current_guests.remove(guest_to_remove)
+    
+    def empty_room(self):
+        """ Method that empties a room of it's current guests """
+        self.current_guests.clear()
